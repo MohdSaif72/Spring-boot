@@ -127,3 +127,14 @@ Hibernate:
         ? rows 
     fetch
         first ? rows only
+2025-07-22T16:56:51.356Z  INFO 7291 --- [ecommerce-api] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+Hibernate: 
+    drop table if exists customers cascade 
+Hibernate: 
+    drop table if exists order_items cascade 
+Hibernate: 
+    drop table if exists orders cascade 
+Hibernate: 
+    drop table if exists products cascade 
+2025-07-22T16:56:51.366Z  INFO 7291 --- [ecommerce-api] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-07-22T16:56:51.369Z  INFO 7291 --- [ecommerce-api] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
