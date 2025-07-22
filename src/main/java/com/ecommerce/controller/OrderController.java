@@ -1,6 +1,6 @@
 package com.ecommerce.controller;
 
-import com.ecommerce.dto.OrderDto;
+import com.ecommerce.dto.*;
 import com.ecommerce.model.Order;
 import com.ecommerce.security.UserPrincipal;
 import com.ecommerce.service.OrderService;
@@ -55,7 +55,7 @@ public class OrderController {
 
     @PostMapping
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public ResponseEntity<OrderDto> createOrder(@Valid @RequestBody OrderCreateRequest orderRequest, Authentication authentication) {
+    public ResponseEntity<OrderDto> createOrder(@Valid @RequestBody OrderCreateDto orderRequest, Authentication authentication) {
         try {
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
             // Users can only create orders for themselves
@@ -103,18 +103,6 @@ public class OrderController {
     }
 
     // Helper classes for request handling
-    public static class OrderCreateRequest {
-        private List<OrderService.OrderItemCreateDto> orderItems;
-
-        public List<OrderService.OrderItemCreateDto> getOrderItems() {
-            return orderItems;
-        }
-
-        public void setOrderItems(List<OrderService.OrderItemCreateDto> orderItems) {
-            this.orderItems = orderItems;
-        }
-    }
-
     public static class StatusUpdateRequest {
         private Order.OrderStatus status;
 

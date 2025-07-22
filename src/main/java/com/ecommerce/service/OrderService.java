@@ -1,6 +1,6 @@
 package com.ecommerce.service;
 
-import com.ecommerce.dto.OrderDto;
+import com.ecommerce.dto.*;
 import com.ecommerce.model.*;
 import com.ecommerce.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,43 +140,5 @@ public class OrderService {
         return dto;
     }
 
-    // Helper classes for order creation
-    public static class OrderItemCreateDto {
-        private Long productId;
-        private Integer quantity;
-        
-        public Long getProductId() { return productId; }
-        public void setProductId(Long productId) { this.productId = productId; }
-        
-        public Integer getQuantity() { return quantity; }
-        public void setQuantity(Integer quantity) { this.quantity = quantity; }
-    }
 
-    public static class OrderItemDto {
-        private Long id;
-        private Long productId;
-        private String productName;
-        private Integer quantity;
-        private BigDecimal unitPrice;
-        private BigDecimal subtotal;
-        
-        // Getters and Setters
-        public Long getId() { return id; }
-        public void setId(Long id) { this.id = id; }
-        
-        public Long getProductId() { return productId; }
-        public void setProductId(Long productId) { this.productId = productId; }
-        
-        public String getProductName() { return productName; }
-        public void setProductName(String productName) { this.productName = productName; }
-        
-        public Integer getQuantity() { return quantity; }
-        public void setQuantity(Integer quantity) { this.quantity = quantity; }
-        
-        public BigDecimal getUnitPrice() { return unitPrice; }
-        public void setUnitPrice(BigDecimal unitPrice) { this.unitPrice = unitPrice; }
-        
-        public BigDecimal getSubtotal() { return subtotal; }
-        public void setSubtotal(BigDecimal subtotal) { this.subtotal = subtotal; }
-    }
 }
