@@ -108,3 +108,4 @@ Hibernate:
 2025-07-23T15:34:30.081Z  WARN 26245 --- [ecommerce-api] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7h49m35s953ms650µs77ns).
 2025-07-23T16:00:18.370Z  WARN 26245 --- [ecommerce-api] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m48s73ms722µs862ns).
 2025-07-24T17:17:54.978Z  WARN 26245 --- [ecommerce-api] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1d1h2m36s450ms104µs482ns).
+2025-07-24T18:16:15.268Z  WARN 26245 --- [ecommerce-api] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=29m50s87ms85µs693ns).
