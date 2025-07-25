@@ -252,4 +252,48 @@ public class CustomExceptions {
             super(message, "RATE_LIMIT_EXCEEDED", HttpStatus.TOO_MANY_REQUESTS);
         }
     }
+
+    /**
+     * Exception thrown when customer already exists
+     */
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public static class CustomerAlreadyExistsException extends EcommerceException {
+        public CustomerAlreadyExistsException(String email) {
+            super(String.format("Customer with email '%s' already exists", email),
+                  "CUSTOMER_ALREADY_EXISTS", HttpStatus.CONFLICT);
+        }
+    }
+
+    /**
+     * Exception thrown when product already exists
+     */
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public static class ProductAlreadyExistsException extends EcommerceException {
+        public ProductAlreadyExistsException(String productName) {
+            super(String.format("Product with name '%s' already exists", productName),
+                  "PRODUCT_ALREADY_EXISTS", HttpStatus.CONFLICT);
+        }
+    }
+
+    /**
+     * Exception thrown when trying to delete a customer with existing orders
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class CustomerHasOrdersException extends EcommerceException {
+        public CustomerHasOrdersException(Long customerId) {
+            super(String.format("Cannot delete customer with ID %d because they have existing orders", customerId),
+                  "CUSTOMER_HAS_ORDERS", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Exception thrown when trying to delete a product that's in existing orders
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class ProductInOrdersException extends EcommerceException {
+        public ProductInOrdersException(Long productId) {
+            super(String.format("Cannot delete product with ID %d because it's referenced in existing orders", productId),
+                  "PRODUCT_IN_ORDERS", HttpStatus.BAD_REQUEST);
+        }
+    }
 }

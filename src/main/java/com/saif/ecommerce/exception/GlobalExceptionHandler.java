@@ -336,6 +336,26 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * Handle runtime exceptions
+     */
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorResponse> handleRuntimeException(
+            RuntimeException ex, HttpServletRequest request) {
+        
+        logger.error("Runtime exception: {}", ex.getMessage(), ex);
+        
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
+                "A runtime error occurred: " + ex.getMessage(),
+                "RUNTIME_ERROR",
+                request.getRequestURI()
+        );
+        
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
      * Handle all other exceptions
      */
     @ExceptionHandler(Exception.class)
@@ -353,5 +373,77 @@ public class GlobalExceptionHandler {
         );
         
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * Handle specific e-commerce exceptions
+     */
+    
+    @ExceptionHandler(CustomExceptions.ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(
+            CustomExceptions.ResourceNotFoundException ex, HttpServletRequest request) {
+        
+        logger.error("Resource not found: {}", ex.getMessage());
+        
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                ex.getMessage(),
+                "RESOURCE_NOT_FOUND",
+                request.getRequestURI()
+        );
+        
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CustomExceptions.InsufficientStockException.class)
+    public ResponseEntity<ErrorResponse> handleInsufficientStockException(
+            CustomExceptions.InsufficientStockException ex, HttpServletRequest request) {
+        
+        logger.error("Insufficient stock: {}", ex.getMessage());
+        
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                ex.getMessage(),
+                "INSUFFICIENT_STOCK",
+                request.getRequestURI()
+        );
+        
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CustomExceptions.CustomerAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleCustomerAlreadyExistsException(
+            CustomExceptions.CustomerAlreadyExistsException ex, HttpServletRequest request) {
+        
+        logger.error("Customer already exists: {}", ex.getMessage());
+        
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                HttpStatus.CONFLICT.getReasonPhrase(),
+                ex.getMessage(),
+                "CUSTOMER_ALREADY_EXISTS",
+                request.getRequestURI()
+        );
+        
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(CustomExceptions.OrderNotCancellableException.class)
+    public ResponseEntity<ErrorResponse> handleOrderNotCancellableException(
+            CustomExceptions.OrderNotCancellableException ex, HttpServletRequest request) {
+        
+        logger.error("Order not cancellable: {}", ex.getMessage());
+        
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                ex.getMessage(),
+                "ORDER_NOT_CANCELLABLE",
+                request.getRequestURI()
+        );
+        
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }
